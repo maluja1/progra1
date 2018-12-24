@@ -90,5 +90,12 @@ int main(){
 		PistasColumnas[i] = (int *)malloc(sizeof(int ));
 	}
 	filas(PistasFilas,numero,matriz);
+	for(int k = 0; k < numero; k++){
+		for(int l = 0 ;l < numero; l++){
+	        printf("%i",pistasFilas[k][l]);
+		}
+		printf("\n");
+	}        	
+
 	return 0;
 }

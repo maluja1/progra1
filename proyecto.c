@@ -10,46 +10,90 @@ int n,m;
 int mf,nf;
 void filas(int **PistasFilas,int numero,int **matriz){
 	int contador = 0 , contadorAnterior = 0 , o = 1;
-	for(int i = 0 ; i < numero ; i++){
-		for (int j = 0; j < numero; ++j)
+	int i,j;
+	for(i = 0 ; i < numero ; i++){
+		for (j = 0; j < numero; ++j)
 		{
-			if(matriz[i][j] == '#'){
+			if(matriz[i][j] > 0){
 				contador++;
 				if(j==numero-1){
-					if(matriz[i][numero-1] == '#'){
+					if(matriz[i][numero-1] > 0){
 						j++;
 					}
 					j++;
 				}
 			}
-			//preguntamos si en la siguiente posicion hay un # , si lo hay el cotador se mantiene iguak
-			if(matriz[i][j+1] == '#' && j<numero){
+			if(matriz[i][j+1] > 0 && j<numero){
 				contador = contador ;	
 			}
 			else if(contador != 0){
-					//condicion para ir cambiando el NmaxF
-					/*if(nf>NmaxF){
-						NmaxF = nf;
-					}
-					else{
-						NmaxF = NmaxF;
-					}*/
-					//pregunta si el contador es distinto a 0 , lo guarda en pistasFilas 
-					PistasFilas[mf][nf] = contador;
-					contadorAnterior = contador;
-					contador = 0;	
-					nf++;
-			}
-			else if(contador == 0 && j==numero-1 && contadorAnterior == 0){
-					//si el contador es 0 , lo guarda en las PistasFilas
-					PistasFilas[mf][nf] = 0;
+					PistasFilas[mf][0] = contador;
 					contador = 0;
-					nf=0;
 			}
 		}
-		nf=0;
 		mf++;
 	}
+	nf = 1;
+	mf = 0;
+	int x,y;
+	for( x = 0 ; x < numero ; x++){
+		for (y = 0; y < numero; ++y)
+		{
+			printf("matriz[%i][%i] == %i\n",x,y,matriz[x][y]);
+			/*if(matriz[x][y] == 0){
+				y++;
+			}*/
+			if(matriz[x][y] > 0){
+				PistasFilas[mf][nf] = matriz[x][y];
+				nf++;
+			}
+		}
+		nf=1;
+		mf++;
+	}
+}
+int nc,mc;
+void columnas(int **PistasColumnas,int numero,int **matriz){
+	int contador = 0 , contadorAnterior = 0 , o = 1;
+	int i,j;
+	for(i = 0 ; i < numero ; i++){
+		for (j = 0; j < numero; ++j)
+		{
+			if(matriz[j][i] == 0){
+				contador = 0;
+				j++;
+			}
+			if(matriz[j][i] > 0){
+				contador++;
+			}
+			if(matriz[j+1][i] > 0 && j<numero){
+				contador = contador ;	
+			}
+			else if(contador != 0){
+				PistasColumnas[mc][0] = contador;
+				contador = 0;
+			}else if(contador == 0){
+				PistasColumnas[mc][0] = 0;
+			}
+		}
+		mc++;
+	}/*
+	nc = 1;
+	mc = 0;
+	int x,y;
+	for( x = 0 ; x < numero ; x++){
+		for (y = 0; y < numero; ++y)
+		{
+			printf("matriz[%i][%i] == %i\n",y,x,matriz[y][x]);
+			if(matriz[y][x] > 0){
+				PistasColumnas[mc][nc] = matriz[y][x];
+				nc++;
+			}
+		}
+		nc=1;
+		mc++;
+	}
+	*/
 }
 int **matriz;
 int matrizz(){
@@ -91,5 +135,20 @@ int main(){
 		PistasColumnas[i] = (int *)malloc(sizeof(int ));
 	}
 	filas(PistasFilas,numero,matriz);
+	for(int k = 0; k < numero; k++){
+		for (int i = 0; i <= PistasFilas[k][0]; ++i)
+		{
+			printf("%i ",PistasFilas[k][i]);
+		}
+		printf("\n");
+	}
+	//columnas(PistasColumnas,numero,matriz);
+	/*for(int k = 0; k < numero; k++){
+		for (int i = 0; i <= PistasColumnas[k][0]; ++i)
+		{
+			printf("%i ",PistasColumnas[k][i]);
+		}
+		printf("\n");
+	} */    	     	
 	return 0;
 }
