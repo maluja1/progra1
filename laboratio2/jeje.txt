@@ -1,0 +1,17 @@
+while(ifilas < 32){
+		iedificios = matriz[ifilas][1]-1;
+		cedif = matriz[ifilas][2];
+		calleActual = matriz[ifilas][0]-1;
+		int i2 = 3;
+		while(iedificios < 15){
+			//printf("ciudad[%i][%i](%i) = matriz[%i][%i](%i) \n",calleActual,iedificios,ciudad[calleActual][iedificios]);
+			if(matriz[ifilas][i2]>ciudad[calleActual][iedificios]){
+				ciudad[calleActual][iedificios] = matriz[ifilas][i2];
+			}else{
+				ciudad[calleActual][iedificios] = ciudad[calleActual][iedificios];
+			}
+			i2++;
+			iedificios++;
+		}
+		ifilas++;
+	}

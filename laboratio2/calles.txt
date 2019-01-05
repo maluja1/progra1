@@ -1,0 +1,32 @@
+calle1 12 4 5 3 4 4
+calle1 4 7 2 3 4 2 3 3 2
+calle1 1 5 6 1 6 2 3
+calle1 7 7 2 3 3 2 3 5 3
+calle2 1 4 6 1 6 2
+calle2 14 2 4 4
+calle2 5 7 3 4 2 3 3 2 3
+calle2 7 7 2 3 3 2 3 5 3
+calle3 1 1 5
+calle3 2 7 1 4 2 3 4 2 3
+calle3 8 7 3 3 2 1 5 3 4
+calle3 6 7 4 2 3 3 2 1 5
+calle4 3 7 4 2 3 4 2 2 3
+calle4 7 7 2 2 3 2 1 2 3
+calle4 14 2 1 4
+calle4 1 7 5 1 4 2 3 4 2
+calle5 1 1 4
+calle5 2 7 1 4 2 3 4 2 2
+calle5 9 7 3 2 1 2 3 1 3
+calle5 5 7 3 4 2 2 3 2 1
+calle6 7 7 2 2 3 1 1 0 3
+calle6 13 3 3 0 3
+calle6 1 3 4 0 4
+calle6 4 7 0 3 4 2 2 3 1
+calle7 6 7 4 2 2 3 1 1 0
+calle7 5 7 3 4 2 2 3 1 1
+calle7 1 4 3 0 3 0
+calle7 13 3 3 0 3
+calle8 1 1 2
+calle8 1 6 2 0 3 0 3 0
+calle8 4 7 0 3 0 2 0 3 0
+calle8 9 7 3 0 1 0 3 0 3
