@@ -58,13 +58,14 @@ int **Calle(int **matriz,int **city,int iedificios,int calleActual,int ifilas){
 int recursion();
 int recursion(int **matriz,int **city, int filas,int NumeroEd){
 	int iedificios,cedif,calleActual;
-	printf("NumeroEd=%i\n",NumeroEd);
+	//printf("NumeroEd=%i\n",NumeroEd);
 	if(NumeroEd == 0){
 		filas++;
+		recursion(matriz,city,filas,matriz[filas][2]);
 	}else{
 		iedificios = matriz[filas][0]-1;
 		cedif = matriz[filas][1] + NumeroEd;
-		printf("iedificios=%i\n",iedificios);
+		//printf("iedificios=%i\n",iedificios);
 		if(matriz[filas][NumeroEd+3]>city[iedificios][cedif]){
 			city[iedificios][cedif] = matriz[filas][NumeroEd+3];
 		}else{
@@ -86,7 +87,6 @@ int recursivo(int **matriz){
 	}
 	printf("el ancho es %i\n",ancho);
 	printf("el largo es %i\n",largo);
-	int ciudad[ancho][largo];
 	int **city;
 	city = (int **)malloc(sizeof(int *)*ancho);
 	for (int i = 0; i <= largo; ++i)
@@ -105,9 +105,22 @@ int recursivo(int **matriz){
 		}
 		printf("\n");
 	}
+	int *CantidadEd;
+	CantidadEd = (int *)malloc(sizeof(int)*fotos);
+	for (int i = 0; i < fotos; ++i)
+	{
+		CantidadEd[i] = matriz[i][2];
+		printf("%i",CantidadEd[i]);
+	}
+	printf("\n");
+	for (int l = 0; l <= ancho; ++l){
+		for (int k = 0; k <= largo; ++k)
+			city[l][k] = 0;
+	}
 	printf("fotos = %i\n",fotos );
 	int fil = 0;
 	recursion(matriz,city,fil,matriz[fil][2]);
+	/*
 	for (int l = 0; l < ancho; ++l)
 	{
 		for (int k = 0; k < largo-1; ++k)
@@ -116,7 +129,7 @@ int recursivo(int **matriz){
 		}
 		printf("\n");
 	}
-
+	*/
 
 	/*****************
 
