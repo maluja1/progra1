@@ -10,6 +10,8 @@ lo que hace esta funcion es leer el archivo de entrada .txt para comenzar a man√
 entrada:
 salida: un puntero doble , con todo lo del archivo almacenado
 */
+
+// 
 int m = 0 , n = 0;
 int **matriz;
 int **leermatriz(){
@@ -20,15 +22,12 @@ int **leermatriz(){
    m=-1;
    while (fgets(linea, MAX_LIN, fp)!=NULL) {
      m=m+1;
-     //printf("La linea es : %s\n", linea);
      matriz[m] = (int *) calloc(MAX_LIN, sizeof(int));
      p = strtok(strtok(linea,"calle")," ");
-     //printf("el matriz[%i] = %s\n",m,p);
      n=-1;
      while(p != NULL) {
        n=n+1;
        sscanf(p,"%d",&val);
-       //printf("%d\n",val);
        matriz[m][n] = val;
        p=strtok(NULL," ");
      }
@@ -37,15 +36,9 @@ int **leermatriz(){
    return matriz;
 }
 int largo = 0 , ancho = 0;
-int **Calle(int **matriz,int **city,int iedificios,int calleActual,int ifilas){
+int Calle(int **matriz,int **city,int iedificios,int calleActual,int ifilas){
 	int i2 = 3;
-	/*
-	printf("iedificios = %i \n",iedificios);
-	printf("calleActual = %i \n",calleActual);
-	printf("ifilas = %i \n",ifilas);
-	*/
 		while(iedificios < 15){
-			//printf("ciudad[%i][%i](%i) = matriz[%i][%i](%i) \n",calleActual,iedificios,city[calleActual][iedificios],ifilas,i2,matriz[ifilas][i2]);
 			if(matriz[ifilas][i2]>city[calleActual][iedificios]){
 				city[calleActual][iedificios] = matriz[ifilas][i2];
 			}else{
@@ -55,23 +48,27 @@ int **Calle(int **matriz,int **city,int iedificios,int calleActual,int ifilas){
 			iedificios++;
 		}
 }
-int recursion();
-int recursion(int **matriz,int **city, int filas,int NumeroEd){
-	int iedificios,cedif,calleActual;
-	//printf("NumeroEd=%i\n",NumeroEd);
-	if(NumeroEd == 0){
-		filas++;
-		recursion(matriz,city,filas,matriz[filas][2]);
+int fotos;
+int recursion(int **matriz,int **city,int *CantidadEd, int foto){
+	int iedificios,cedif,calleActual,NumeroEd;
+	NumeroEd = CantidadEd[foto];
+	iedificios = matriz[foto][0]-1;
+	cedif = (matriz[foto][1]-2) + CantidadEd[foto];
+	if(CantidadEd[foto] == 0){
+		foto++;
+		if(foto == fotos){
+			return 0;
+		}else{
+			recursion(matriz,city,CantidadEd,foto);
+		}
 	}else{
-		iedificios = matriz[filas][0]-1;
-		cedif = matriz[filas][1] + NumeroEd;
-		//printf("iedificios=%i\n",iedificios);
-		if(matriz[filas][NumeroEd+3]>city[iedificios][cedif]){
-			city[iedificios][cedif] = matriz[filas][NumeroEd+3];
+		if(matriz[foto][NumeroEd+2]>city[iedificios][cedif]){
+			city[iedificios][cedif] = matriz[foto][NumeroEd+2];
 		}else{
 			city[iedificios][cedif] = city[iedificios][cedif];
 		}
-		recursion(matriz,city,filas,NumeroEd-1);
+		CantidadEd[foto] = CantidadEd[foto]-1;
+		recursion(matriz,city,CantidadEd,foto);
 	}
 }
 int recursivo(int **matriz){
@@ -95,7 +92,7 @@ int recursivo(int **matriz){
 	}
 	int ifilas = 0; 
 	int iedificios,cedif,calleActual;
-	int fotos = 0;
+	fotos = 0;
 	for (int i = 0; i <= m; ++i)
 	{
 		fotos++;
@@ -110,17 +107,14 @@ int recursivo(int **matriz){
 	for (int i = 0; i < fotos; ++i)
 	{
 		CantidadEd[i] = matriz[i][2];
-		printf("%i",CantidadEd[i]);
 	}
-	printf("\n");
 	for (int l = 0; l <= ancho; ++l){
 		for (int k = 0; k <= largo; ++k)
 			city[l][k] = 0;
 	}
 	printf("fotos = %i\n",fotos );
 	int fil = 0;
-	recursion(matriz,city,fil,matriz[fil][2]);
-	/*
+	recursion(matriz,city,CantidadEd,fil);
 	for (int l = 0; l < ancho; ++l)
 	{
 		for (int k = 0; k < largo-1; ++k)
@@ -129,25 +123,6 @@ int recursivo(int **matriz){
 		}
 		printf("\n");
 	}
-	*/
-
-	/*****************
-
-
-
-	terminar el iterativo.....
-
-
-	****************/
-
-
-
-
-
-
-
-
-
 }
 int iterativo(int **matriz){
 	int cantidadEdificios,Ncalle,posicion;
@@ -219,7 +194,7 @@ int menu(){
 int main()
 {
 	int **matriz = leermatriz();
-	int opcion = 2;//menu();
+	int opcion = menu();
 	switch(opcion){
 		case 1:
 			iterativo(matriz);
